@@ -1,3 +1,4 @@
+    #nota form
     <body>
         <h2 style="margin-top:0px">Nota <?php echo $button ?> | <a href="<?php echo site_url('nota'); ?>" class="btn btn-default">Batal</a></h2>
         <form action="<?php echo $action; ?>" name="ipong" method="post">
