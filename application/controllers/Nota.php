@@ -51,6 +51,7 @@ class Nota extends CI_Controller
 		'id_nota' => $row->id_nota,
 		'nomor' => $row->nomor,
 		'penerimanota' => $row->penerimanota,
+        'nomortelepon' => $row->nomortelepon,
 		'namateknisi' => $row->namateknisi,
 		'namapegawai' => $row->namapegawai,
 		'tanggal' => $row->tanggal,
@@ -58,7 +59,7 @@ class Nota extends CI_Controller
 		'keterangan' => $row->keterangan,
 		'isservice' => $row->isservice,
 	    );
-            $this->load->view('nota/tbl_nota_read', $data);
+            $this->template->load('template','nota/tbl_nota_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('nota'));
@@ -75,6 +76,7 @@ class Nota extends CI_Controller
                 'id_nota' => set_value('id_nota'),
                 'nomor' => date('m'.'y')."Serv".$this->Nota_m->getnomornota()->id_nota,
                 'penerimanota' => set_value('penerimanota'),
+                'nomortelepon' => set_value('nomortelepon'),
                 'namateknisi' => set_value('namateknisi'),
                 'namapegawai' => set_value('namapegawai'),
                 'tanggal' => set_value('tanggal'),
@@ -89,6 +91,7 @@ class Nota extends CI_Controller
                 'id_nota' => set_value('id_nota'),
                 'nomor' => date('m'.'y')."Prod".$this->Nota_m->getnomornota()->id_nota,
                 'penerimanota' => set_value('penerimanota'),
+                'nomortelepon' => set_value('nomortelepon'),
                 // 'namateknisi' => set_value('namateknisi'),
                 'namapegawai' => set_value('namapegawai'),
                 'tanggal' => set_value('tanggal'),
@@ -112,6 +115,7 @@ class Nota extends CI_Controller
             $data = array(
         		'nomor' => $this->input->post('nomor',TRUE),
         		'penerimanota' => $this->input->post('penerimanota',TRUE),
+                'nomortelepon' => $this->input->post('nomortelepon',TRUE),
         		'namateknisi' => $this->input->post('namateknisi',TRUE),
         		'namapegawai' => $this->input->post('namapegawai',TRUE),
         		'tanggal' => $this->input->post('tanggal',TRUE),
@@ -149,6 +153,7 @@ class Nota extends CI_Controller
             $data = array(
         'nomor' => $this->input->post('nomor',TRUE),
         'penerimanota' => $this->input->post('penerimanota',TRUE),
+        'nomortelepon' => $this->input->post('nomortelepon',TRUE),
         'namateknisi' => 0,
         'namapegawai' => $this->input->post('namapegawai',TRUE),
         'tanggal' => $this->input->post('tanggal',TRUE),
@@ -174,6 +179,7 @@ class Nota extends CI_Controller
 		'id_nota' => set_value('id_nota', $row->id_nota),
 		'nomor' => set_value('nomor', $row->nomor),
 		'penerimanota' => set_value('penerimanota', $row->penerimanota),
+        'nomortelepon' => $this->input->post('nomortelepon',TRUE),
 		'namateknisi' => set_value('namateknisi', $row->namateknisi),
 		'namapegawai' => set_value('namapegawai', $row->namapegawai),
 		'tanggal' => set_value('tanggal', $row->tanggal),
@@ -198,6 +204,7 @@ class Nota extends CI_Controller
             $data = array(
 		'nomor' => $this->input->post('nomor',TRUE),
 		'penerimanota' => $this->input->post('penerimanota',TRUE),
+        'nomortelepon' => $this->input->post('nomortelepon',TRUE),
 		'namateknisi' => $this->input->post('namateknisi',TRUE),
 		'namapegawai' => $this->input->post('namapegawai',TRUE),
 		'tanggal' => $this->input->post('tanggal',TRUE),
@@ -230,6 +237,7 @@ class Nota extends CI_Controller
     {
 	$this->form_validation->set_rules('nomor', 'nomor', 'trim|required');
 	$this->form_validation->set_rules('penerimanota', 'penerimanota', 'trim|required');
+    $this->form_validation->set_rules('nomortelepon', 'nomortelepon', 'trim|required');
 	$this->form_validation->set_rules('namateknisi', 'namateknisi', 'trim|required');
 	$this->form_validation->set_rules('namapegawai', 'namapegawai', 'trim|required');
 	$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');

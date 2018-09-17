@@ -44,7 +44,7 @@
 		<th>Nomor</th>
 		<th>Penerima Nota</th>
 		<!-- <th>Nama Teknisi</th> -->
-		<th>Namapegawai</th>
+		<!-- <th>Namapegawai</th> -->
 		<th>Tanggal</th>
 		<!-- <th>Totalbiaya</th> -->
 		<!-- <th>Keterangan</th> -->
@@ -59,7 +59,7 @@
 			<td><?php echo $nota->nomor ?></td>
 			<td><?php echo $nota->penerimanota ?></td>
 			<!-- <td><?php echo $nota->namateknisi ?></td> -->
-			<td><?php echo $nota->namapegawai ?></td>
+			<!-- <td><?php echo $nota->namapegawai ?></td> -->
 			<td><?php echo $nota->tanggal ?></td>
 			<!-- <td><?php echo $nota->totalbiaya ?></td> -->
 			<!-- <td><?php echo $nota->keterangan ?></td> -->

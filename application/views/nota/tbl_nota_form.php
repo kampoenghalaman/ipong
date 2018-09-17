@@ -1,4 +1,3 @@
-    #nota form
     <body>
         <h2 style="margin-top:0px">Nota <?php echo $button ?> | <a href="<?php echo site_url('nota'); ?>" class="btn btn-default">Batal</a></h2>
         <form action="<?php echo $action; ?>" name="ipong" method="post">
@@ -13,7 +12,10 @@
             <label for="varchar">Penerima Nota <?php echo form_error('penerimanota') ?></label>
             <input type="text" class="form-control" name="penerimanota" id="penerimanota" placeholder="Penerima nota" value="<?php echo $penerimanota; ?>" />
         </div>
-        
+        <div class="form-group">
+            <label for="varchar">Nomor Telepon <?php echo form_error('nomortelepon') ?></label>
+            <input type="text" class="form-control" name="nomortelepon" id="nomortelepon" placeholder="nomor telepon" value="<?php echo $nomortelepon; ?>" />
+        </div>
 	    <div class="form-group">
             <label for="varchar">Nama Teknisi <?php echo form_error('namateknisi') ?></label>
             <input type="text" class="form-control" name="namateknisi" id="namateknisi" placeholder="Nama teknisi" value="<?php echo $namateknisi; ?>" />
@@ -76,6 +78,10 @@
         <div class="form-group">
             <label for="varchar">Penerima Nota <?php echo form_error('penerimanota') ?></label>
             <input type="text" class="form-control" name="penerimanota" id="penerimanota" placeholder="Penerima nota" value="<?php echo $penerimanota; ?>" />
+        </div>
+        <div class="form-group">
+            <label for="varchar">Nomor Telepon <?php echo form_error('nomortelepon') ?></label>
+            <input type="text" class="form-control" name="nomortelepon" id="nomortelepon" placeholder="nomor telepon" value="<?php echo $nomortelepon; ?>" />
         </div>
         <div class="form-group">
             <!-- <label for="varchar">Namateknisi <?php echo form_error('namateknisi') ?></label> -->
