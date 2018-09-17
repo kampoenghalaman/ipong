@@ -95,6 +95,6 @@ class cetaknota extends CI_Controller {
 		$pdf->cell(199,12,'',0,1,'C');
 		$pdf->cell(100,0,$penerima,0,0,'C');
 		$pdf->cell(100,0,$pegawai,0,1,'C');
-		$pdf->output();
+		$pdf->output("D", $nonota.".pdf");
 	}
 }

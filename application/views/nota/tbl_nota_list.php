@@ -60,7 +60,7 @@
 			<td><?php echo $nota->penerimanota ?></td>
 			<!-- <td><?php echo $nota->namateknisi ?></td> -->
 			<!-- <td><?php echo $nota->namapegawai ?></td> -->
-			<td><?php echo $nota->tanggal ?></td>
+			<td><?php echo date('d M Y', strtotime($nota->tanggal)) ?></td>
 			<!-- <td><?php echo $nota->totalbiaya ?></td> -->
 			<!-- <td><?php echo $nota->keterangan ?></td> -->
 			<td><?php if($nota->isservice == 1){echo "Service";}else{echo "Pembelian Produk";}  ?></td>
