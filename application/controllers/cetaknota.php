@@ -19,6 +19,7 @@ class cetaknota extends CI_Controller {
 			$tanggal = date('d M Y', strtotime($rew->tanggal));
 			$totalbiaya = $rew->totalbiaya;
 			$keterangan = $rew->keterangan;
+			$nomortelepon = $rew->nomortelepon;
 			$isservice = $rew->isservice; 	
 		}
 
@@ -26,7 +27,7 @@ class cetaknota extends CI_Controller {
 		$pdf->addpage();
 		$pdf->image(base_url('assets/logo.png'),10,10);
 		$pdf->setfont('arial','B',16);
-		$pdf->cell(190,7,'IM Computer',0,1,'R');
+		$pdf->cell(190,7,'',0,1,'R');
 		$pdf->setfont('arial','',12);
 		$pdf->cell(190,5,'Jl. Garuda No.55 Kp. Genteng Rt.03/02',0,1,'R');
 		$pdf->cell(190,5,'Kec.Baros Kel.Baros Kota Sukabumi',0,1,'R');
@@ -51,16 +52,27 @@ class cetaknota extends CI_Controller {
 		$pdf->cell(33,5,'Tempat dan Tanggal',0,0,'L');
 		$pdf->cell(80,5,': Sukabumi, '.$tanggal,0,0,'L');
 		#pic
-		$pdf->cell(25,5,'Teknisi',0,0,'L');
-		$pdf->cell(66,5,': '.$teknisi,0,1,'L');
+		if ($isservice == 1){
+			$pdf->cell(25,5,'Teknisi',0,0,'L');
+			$pdf->cell(66,5,': '.$teknisi,0,1,'L');
+		}else{
+			$pdf->cell(25,5,'',0,0,'L');
+			$pdf->cell(66,5,'',0,1,'L');
+		}
+
 		#enter
 		$pdf->cell(0,3,'',0,1);
 		// $pdf->cell(190,6,'test',1,0);
-		
+		#table
 		#enter
 		$pdf->setfont('arial','B',10);
 		$pdf->cell(8,6,'No',1,0,'C');
-		$pdf->cell(75,6,'Sevice/Maintenance',1,0,'C');
+		if ($isservice == 1){
+			$pdf->cell(75,6,'Sevice/Maintenance',1,0,'C');
+		}else{
+			$pdf->cell(75,6,'Nama Produk',1,0,'C');
+		}
+		
 		$pdf->cell(20,6,'Banyak',1,0,'C');
 		$pdf->cell(40,6,'Harga',1,0,'C');
 		$pdf->cell(47,6,'Jumlah',1,1,'C');
@@ -72,19 +84,24 @@ class cetaknota extends CI_Controller {
 			$pdf->cell(8,6,$no++,1,0,'C');
 			$pdf->cell(75,6,$row->namaprodukjasa,1,0,'C');
 			$pdf->cell(20,6,$row->qty,1,0,'C');
-			$pdf->cell(40,6,$row->harga,1,0,'C');
-			$pdf->cell(47,6,$row->jumlah,1,1,'R');
+			$pdf->cell(40,6,"Rp " . number_format($row->harga,2,',','.'),1,0,'C');
+			$pdf->cell(47,6,"Rp " . number_format($row->jumlah,2,',','.'),1,1,'R');
 		}
 
 		#total
 		$pdf->setfont('arial','B',10);
 		$pdf->cell(143,6,'Total',1,0,'R');
-		$pdf->cell(47,6,$totalbiaya,1,1,'R');
+		$pdf->cell(47,6,"Rp " . number_format($totalbiaya,2,',','.'),1,1,'R');
 
 		#keterangan
 		$pdf->cell(10,2,'',0,1);
 		$pdf->setfont('arial','B',10);
-		$pdf->cell(190,10,'Keterangan : '.$keterangan,1,1,'L');
+		if ($isservice == 1){
+			$pdf->cell(190,10,'Keterangan : '.$keterangan,1,1,'L');
+		}else{
+			$pdf->cell(0,3,'',0,1);
+		}
+		
 
 		#ttd
 		// $pdf->cell(10,2,'',0,1);
@@ -93,8 +110,8 @@ class cetaknota extends CI_Controller {
 		$pdf->cell(100,0,'Tanda Terima,',0,0,'C');
 		$pdf->cell(100,0,'Hormat Kami,',0,1,'C');
 		$pdf->cell(199,12,'',0,1,'C');
-		$pdf->cell(100,0,$penerima,0,0,'C');
+		$pdf->cell(100,0,$penerima." / ".$nomortelepon,0,0,'C');
 		$pdf->cell(100,0,$pegawai,0,1,'C');
-		$pdf->output("D", $nonota.".pdf");
+		$pdf->output("I", $nonota.".pdf");
 	}
 }

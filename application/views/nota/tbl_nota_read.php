@@ -3,15 +3,17 @@ $id_nota = $this->uri->segment(3);
 $projas = $this->db->get_where('tbl_notadata', 'id_nota ='.$id_nota)->result();
 if ($isservice == '1'){ 
     $jenis = "Servise";
-    $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td>".$nomor."<br><br>".date('d M Y', strtotime($tanggal))."</td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota." / ".$nomortelepon."<br><br>".$namateknisi."</td></tr>
+    $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td>".$nomor."<br><br>".date('d M Y', strtotime($tanggal))."</td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
             <tr><td colspan='6'></td></tr>";
     $ktrg = "<table class='table table-bordered' border='1'><tr><td width='10%''>Keterangan</td><td>".$keterangan."</td></tr></table>";
+    $judul = "<th>Servise / Maintenance</th>";
  }else{
     $jenis = "Penjualan";
     $teknisi= "" ;
-    $header = "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td>".$nomor."<br><br>".date('d M Y', strtotime($tanggal))."</td><td width='120'>Penerima Nota</td><td width='10'> : </td><td>".$penerimanota." / ".$nomortelepon."</td></tr>
+    $header = "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td>".$nomor."<br><br>".date('d M Y', strtotime($tanggal))."</td><td width='120'>Penerima Nota</td><td width='10'> : </td><td>".$penerimanota."</td></tr>
             <tr><td colspan='6'></td></tr>";
     $ktrg = "";
+    $judul = "<th>Nama Produk</th>";
 }
 ?>
     <body>
@@ -23,7 +25,7 @@ if ($isservice == '1'){
         <table class="table table-bordered" border="1">
             <thead>
                 <th>No</th>
-                <th>Servise / Maintenance</th>
+                <?php echo $judul;?>
                 <th>Banyak</th>
                 <th>Harga</th>
                 <th>Jumlah</th>

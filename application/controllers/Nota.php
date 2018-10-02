@@ -83,7 +83,7 @@ class Nota extends CI_Controller
                 'totalbiaya' => set_value('totalbiaya'),
                 'keterangan' => set_value('keterangan'),
                 'isservice' => set_value('isservice'),
-            );    
+            ); 
         }else{
             $data = array(
                 'button' => 'Pembelian Produk',
@@ -100,6 +100,7 @@ class Nota extends CI_Controller
                 'isservice' => set_value('isservice'),
             );
         }
+        $data['namapegserv'] = $this->Nota_m->getnamapegserv("tbl_peg_service");
         $this->template->load('template','nota/tbl_nota_form', $data);
     }
     
@@ -148,7 +149,8 @@ class Nota extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            redirect(base_url('nota/create/1'));
+            // $this->create();
         } else {
             $data = array(
         'nomor' => $this->input->post('nomor',TRUE),
@@ -161,8 +163,20 @@ class Nota extends CI_Controller
         'keterangan' => 0,
         'isservice' => 0,
         );
-
-            $this->Nota_m->insert($data);
+            $hmultif = count($_POST['jasa'])-1;
+            #insertingdata
+            $id_nota = $this->Nota_m->createNota('tbl_nota',$data);
+            #lastinsertid
+            $notadata = array();
+            for($i=0;$i<$hmultif;$i++){
+                $notadata['id_nota'] = $id_nota;
+                $notadata['namaprodukjasa'] = $_POST['jasa'][$i];
+                $notadata['qty'] = $_POST['qty'][$i];
+                $notadata['harga'] = $_POST['harga'][$i];
+                $notadata['jumlah'] = $_POST['jumlah'][$i];
+                $inotadata = $this->Nota_m->insertNotadata('tbl_notadata',$notadata);
+            }
+            // $this->Nota_m->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('nota'));
         }
@@ -173,28 +187,117 @@ class Nota extends CI_Controller
         $row = $this->Nota_m->get_by_id($id);
 
         if ($row) {
-            $data = array(
-                'button' => 'Update',
-                'action' => site_url('nota/update_action'),
-		'id_nota' => set_value('id_nota', $row->id_nota),
-		'nomor' => set_value('nomor', $row->nomor),
-		'penerimanota' => set_value('penerimanota', $row->penerimanota),
-        'nomortelepon' => $this->input->post('nomortelepon',TRUE),
-		'namateknisi' => set_value('namateknisi', $row->namateknisi),
-		'namapegawai' => set_value('namapegawai', $row->namapegawai),
-		'tanggal' => set_value('tanggal', $row->tanggal),
-		'totalbiaya' => set_value('totalbiaya', $row->totalbiaya),
-		'keterangan' => set_value('keterangan', $row->keterangan),
-		'isservice' => set_value('isservice', $row->isservice),
-	    );
-            $this->load->view('nota/tbl_nota_form', $data);
+            if($row->isservice == '1'){
+                $data = array(
+                    'button' => 'Services',
+                    'action' => site_url('nota/update_service'),
+                    'id_nota' => set_value('id_nota', $row->id_nota),
+                    'nomor' => set_value('nomor', $row->nomor),
+                    'penerimanota' => set_value('penerimanota', $row->penerimanota),
+                    'nomortelepon' => set_value('nomortelepon', $row->nomortelepon),
+                    'namateknisi' => set_value('namateknisi', $row->namateknisi),
+                    'namapegawai' => set_value('namapegawai', $row->namapegawai),
+                    'tanggal' => set_value('tanggal', $row->tanggal),
+                    'totalbiaya' => set_value('totalbiaya', $row->totalbiaya),
+                    'keterangan' => set_value('keterangan', $row->keterangan),
+                    'isservice' => set_value('isservice', $row->isservice),
+                );
+            }else{
+                $data = array(
+                    'button' => 'Pembelian Produk',
+                    'action' => site_url('nota/update_produk'),
+                    'id_nota' => set_value('id_nota', $row->id_nota),
+                    'nomor' => set_value('nomor', $row->nomor),
+                    'penerimanota' => set_value('penerimanota', $row->penerimanota),
+                    'nomortelepon' => set_value('nomortelepon', $row->nomortelepon),
+                    'namateknisi' => set_value('namateknisi', $row->namateknisi),
+                    'namapegawai' => set_value('namapegawai', $row->namapegawai),
+                    'tanggal' => set_value('tanggal', $row->tanggal),
+                    'totalbiaya' => set_value('totalbiaya', $row->totalbiaya),
+                    'keterangan' => set_value('keterangan', $row->keterangan),
+                    'isservice' => set_value('isservice', $row->isservice),
+                );
+            }
+            $data['namapegserv'] = $this->Nota_m->getnamapegserv("tbl_peg_service");
+            $this->template->load('template','nota/tbl_nota_formupdate', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('nota'));
         }
     }
+
+    public function updatenew($id){
+        $row = $this->Nota_m->get_by_id($id);
+        if ($row) {
+            if($row->isservice == '1'){
+                $data = array(
+                    'button' => 'Update Nota Services',
+                    'action' => site_url('nota/update_service'),
+                    'id_nota' => set_value('id_nota', $row->id_nota),
+                    'nomor' => set_value('nomor', $row->nomor),
+                    'penerimanota' => set_value('penerimanota', $row->penerimanota),
+                    'nomortelepon' => set_value('nomortelepon', $row->nomortelepon),
+                    'namateknisi' => set_value('namateknisi', $row->namateknisi),
+                    'namapegawai' => set_value('namapegawai', $row->namapegawai),
+                    'tanggal' => set_value('tanggal', $row->tanggal),
+                    'totalbiaya' => set_value('totalbiaya', $row->totalbiaya),
+                    'keterangan' => set_value('keterangan', $row->keterangan),
+                    'isservice' => set_value('isservice', $row->isservice),
+                );
+            }else{
+                $data = array(
+                    'button' => 'Update Nota Penjualan',
+                    'action' => site_url('nota/update_produk'),
+                    'id_nota' => set_value('id_nota', $row->id_nota),
+                    'nomor' => set_value('nomor', $row->nomor),
+                    'penerimanota' => set_value('penerimanota', $row->penerimanota),
+                    'nomortelepon' => set_value('nomortelepon', $row->nomortelepon),
+                    'namateknisi' => set_value('namateknisi', $row->namateknisi),
+                    'namapegawai' => set_value('namapegawai', $row->namapegawai),
+                    'tanggal' => set_value('tanggal', $row->tanggal),
+                    'totalbiaya' => set_value('totalbiaya', $row->totalbiaya),
+                    'keterangan' => set_value('keterangan', $row->keterangan),
+                    'isservice' => set_value('isservice', $row->isservice),
+                );
+            }
+            // form yang tersembunyi
+            $data['namaprodukjasa'] = set_value('namaprodukjasa');
+            $data['qty'] = set_value('qty');
+            $data['harga'] = set_value('harga');
+            $data['jumlah'] = set_value('jumlah');
+            $data['namapegserv'] = $this->Nota_m->getnamapegserv("tbl_peg_service");
+            $this->template->load('template','nota/tbl_nota_updatenew', $data);
+        }
+    }
+
+    public function simpandatanota(){
+            $data = array(
+                'id_nota' => $this->input->post('id_nota',TRUE),
+                'namaprodukjasa' => $this->input->post('namaprodukjasa',TRUE),
+                'qty' => $this->input->post('qty',TRUE),
+                'harga' => $this->input->post('harga',TRUE),
+                'jumlah' => $this->input->post('jumlah',TRUE),
+            );
+
+            #insertingdata
+            $notadata = $this->Nota_m->insertNotadata('tbl_notadata',$data);
+        
+            $this->session->set_flashdata('message', 'Create Record Success');
+            redirect(site_url('nota/updatenew/'.$this->input->post('id_nota')));
+    }
+
+    public function updatedatanota(){
+        echo "ubah";
+    }
+
+    public function hapusdatanota($id){
+        $in= substr($id, 0, 2);
+        $ind= substr($id, 2, 2);
+        $this->Nota_m->deleteND('tbl_notadata',$in);
+        redirect(site_url('nota/updatenew/'.$ind));
+    }
     
-    public function update_action() 
+    public function update_service() 
     {
         $this->_rules();
 
@@ -202,16 +305,39 @@ class Nota extends CI_Controller
             $this->update($this->input->post('id_nota', TRUE));
         } else {
             $data = array(
-		'nomor' => $this->input->post('nomor',TRUE),
-		'penerimanota' => $this->input->post('penerimanota',TRUE),
-        'nomortelepon' => $this->input->post('nomortelepon',TRUE),
-		'namateknisi' => $this->input->post('namateknisi',TRUE),
-		'namapegawai' => $this->input->post('namapegawai',TRUE),
-		'tanggal' => $this->input->post('tanggal',TRUE),
-		'totalbiaya' => $this->input->post('totalbiaya',TRUE),
-		'keterangan' => $this->input->post('keterangan',TRUE),
-		'isservice' => $this->input->post('isservice',TRUE),
-	    );
+    		'nomor' => $this->input->post('nomor',TRUE),
+    		'penerimanota' => $this->input->post('penerimanota',TRUE),
+            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
+    		'namateknisi' => $this->input->post('namateknisi',TRUE),
+    		'namapegawai' => $this->input->post('namapegawai',TRUE),
+    		'tanggal' => $this->input->post('tanggal',TRUE),
+    		'totalbiaya' => $this->input->post('totalbiaya',TRUE),
+    		'keterangan' => $this->input->post('keterangan',TRUE),
+    		'isservice' => $this->input->post('isservice',TRUE),
+    	    );
+
+            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('nota'));
+        }
+    }
+
+    public function update_produk() 
+    {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->update($this->input->post('id_nota', TRUE));
+        } else {
+            $data = array(
+            'nomor' => $this->input->post('nomor',TRUE),
+            'penerimanota' => $this->input->post('penerimanota',TRUE),
+            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
+            'namapegawai' => $this->input->post('namapegawai',TRUE),
+            'tanggal' => $this->input->post('tanggal',TRUE),
+            'totalbiaya' => $this->input->post('totalbiaya',TRUE),
+            'isservice' => $this->input->post('isservice',TRUE),
+            );
 
             $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');

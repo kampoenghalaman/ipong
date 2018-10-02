@@ -68,7 +68,7 @@
 				<?php 
 				echo anchor(site_url('nota/read/'.$nota->id_nota),'Read'); 
 				echo ' | '; 
-				echo anchor(site_url('nota/update/'.$nota->id_nota),'Update'); 
+				echo anchor(site_url('nota/updatenew/'.$nota->id_nota),'Update'); 
 				echo ' | '; 
 				echo anchor(site_url('nota/delete/'.$nota->id_nota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
                 echo ' | '; 
