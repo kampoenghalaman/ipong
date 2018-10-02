@@ -19,6 +19,11 @@
 <?php 
 $id_nota = $this->uri->segment(3);
 $projas = $this->db->get_where('tbl_notadata', 'id_nota ='.$id_nota)->result();
+$query = $this->db->query("SELECT sum(jumlah) as jml FROM tbl_notadata WHERE id_nota =".$id_nota."");
+foreach($query->result() as $ttljml){
+    $total = $ttljml->jml;
+}
+
 if ($isservice == '1'){ 
     $jenis = "Servise";
     $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td><input type='text' class='form-control' name='nomor' id='nomor' placeholder='nomor' value=".$nomor." readonly/><br><br><input type='text' class='form-control' name='tanggal' id='tanggalnota' placeholder='Tanggal' value=".date("Y-m-d")." /></td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
@@ -98,7 +103,7 @@ if ($isservice == '1'){
                     echo "</tr>";
                 }
             ?>
-            <tr><td></td><td colspan="4">Totalbiaya</td><td><?php echo "<p align='right'>Rp " . number_format($totalbiaya,2,',','.'); ?></p></td></tr>
+            <tr><td></td><td colspan="4">Totalbiaya</td><td><?php echo "<p align='right'>Rp " . number_format($total,2,',','.'); ?></p></td></tr>
             </tbody>
         </table>
         <br>
