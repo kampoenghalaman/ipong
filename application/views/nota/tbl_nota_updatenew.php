@@ -1,3 +1,4 @@
+<?php $id_nota = $this->uri->segment(3);?>
 <script>
  //Inisiasi awal penggunaan jQuery
  $(document).ready(function(){
@@ -6,18 +7,34 @@
 
   //Ketika elemen class tampil di klik maka elemen class gambar tampil
         $('#tampil').click(function(){
-   $('.formnotadata').show();
+            $('.formnotadata').show();
+            document.getElementById('id_notadata').value = "";
+            document.getElementById('namaprodukjasa').value = "";
+            document.getElementById('qty').value = "";
+            document.getElementById('harga').value = "";
+            document.getElementById('jumlah').value = "";
         });
 
   //Ketika elemen class sembunyi di klik maka elemen class gambar sembunyi
         $('#sembunyi').click(function(){
    //Sembunyikan elemen class gambar
-   $('.formnotadata').hide();        
+        $('.formnotadata').hide();        
+        });
+
+        $('.ubah').click(function(){
+            $('.formnotadata').show();
+            var id_notadata = $(this).val();
+            var att = id_notadata.split(',');
+            document.getElementById('id_notadata').value = att[0];
+            document.getElementById('namaprodukjasa').value = att[1];
+            document.getElementById('qty').value = att[2];
+            document.getElementById('harga').value = att[3];
+            document.getElementById('jumlah').value = att[4];
+            // $isi = $row->id_notadata.",".$row->namaprodukjasa.",".$row->qty.",".$row->harga.",".$row->jumlah;
         });
  });
  </script>
 <?php 
-$id_nota = $this->uri->segment(3);
 $projas = $this->db->get_where('tbl_notadata', 'id_nota ='.$id_nota)->result();
 $query = $this->db->query("SELECT sum(jumlah) as jml FROM tbl_notadata WHERE id_nota =".$id_nota."");
 foreach($query->result() as $ttljml){
@@ -28,7 +45,7 @@ if ($isservice == '1'){
     $jenis = "Servise";
     $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td><input type='text' class='form-control' name='nomor' id='nomor' placeholder='nomor' value=".$nomor." readonly/><br><br><input type='text' class='form-control' name='tanggal' id='tanggalnota' placeholder='Tanggal' value=".date("Y-m-d")." /></td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
             <tr><td colspan='6'></td></tr>";
-    $ktrg = "<table class='table table-bordered' border='1'><tr><td width='10%''>Keterangan</td><td>".$keterangan."</td></tr></table>";
+    $ktrg = "<table class='table table-bordered' border='1'><tr><td width='10%''>Keterangan</td><td><textarea name='keterangan' class='input-block-level' rows='3'>".$keterangan."</textarea></td></tr></table>";
     $judul = "<th>Servise / Maintenance</th>";
  }else{
     $jenis = "Penjualan";
@@ -41,7 +58,7 @@ if ($isservice == '1'){
 ?>
 
     <body>
-        <h2 style="margin-top:0px">Nota <?php echo $jenis;?></h2>
+        <h2 style="margin-top:0px">Nota <?php echo $jenis." | ".anchor(site_url('nota/read/'.$id_nota),"<input type='button' class='btn btn-primary' value='Cancel'/>");?></h2>
         <table class="table" >
             <tr>
                 <td>No.Nota</td>
@@ -85,7 +102,7 @@ if ($isservice == '1'){
                 <th width='10%'>Aksi Perubahan</th>
                 <th>No</th>
                 <?php echo $judul;?>
-                <th>Banyak</th>
+                <th width="5">Banyak</th>
                 <th>Harga</th>
                 <th>Jumlah</th>
             </thead>
@@ -93,8 +110,9 @@ if ($isservice == '1'){
             <?php 
                 $no=1;
                 foreach ($projas as $row){
+                    $isi = $row->id_notadata.",".$row->namaprodukjasa.",".$row->qty.",".$row->harga.",".$row->jumlah;
                     echo "<tr>";
-                    echo "<td>".anchor(base_url('Nota/updatedatanota/'.$row->id_notadata),"ubah")." | ".anchor(base_url('Nota/hapusdatanota/'.$row->id_notadata.$row->id_nota),"hapus")."</td>";
+                    echo "<td><p align='center'><button class='ubah' title='ubah' value='".$isi."'><i class='icon-pencil'></i></button> | ".anchor(base_url('Nota/hapusdatanota/'.$row->id_notadata.$row->id_nota),"<button><i class='icon-remove'></i></button>", array('title'=>'hapus'))."</p></td>";
                     echo "<td>".$no++."</td>";
                     echo "<td>".$row->namaprodukjasa."</td>";
                     echo "<td>".$row->qty."</td>";
@@ -116,7 +134,7 @@ if ($isservice == '1'){
             <table width='40%' align='center'>
                 <tr>
                     <td width="35%"><b>Nama Produk/Service</b></td>
-                    <td width="5%">:</td>
+                    <td width="5%">:</td><input type="hidden" name="id_notadata" id="id_notadata"/>
                     <td width="60%"><input type="text" class="input-block-level" name="namaprodukjasa" id="namaprodukjasa" placeholder="Produk/Service" value="<?php echo $namaprodukjasa; ?>" required/></td>
                 </tr>
                 <tr>
@@ -155,7 +173,7 @@ if ($isservice == '1'){
                 <td width="30%">
                     <input type="hidden" name="id_nota" value="<?php echo $id_nota; ?>" /> 
                     <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
-                    <a href="<?php echo site_url('nota') ?>" class="btn btn-default">Cancel</a>
+                    <a href="<?php echo site_url('nota/read/'.$id_nota) ?>" class="btn btn-default">Cancel</a>
                 </td>
             </tr>
         </table>

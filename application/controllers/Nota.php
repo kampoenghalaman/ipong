@@ -278,10 +278,15 @@ class Nota extends CI_Controller
                 'harga' => $this->input->post('harga',TRUE),
                 'jumlah' => $this->input->post('jumlah',TRUE),
             );
+            if($_POST['id_notadata'] == NULL){    
+                #insertingdata
+                $notadata = $this->Nota_m->insertNotadata('tbl_notadata',$data);
+            }else{
+                echo "ada";
+                #updatingdata
+                $notadata = $this->Nota_m->updateNotadata($_POST['id_notadata'],$data);
+            }
 
-            #insertingdata
-            $notadata = $this->Nota_m->insertNotadata('tbl_notadata',$data);
-        
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('nota/updatenew/'.$this->input->post('id_nota')));
     }

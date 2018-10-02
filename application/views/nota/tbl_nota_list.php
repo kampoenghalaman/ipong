@@ -68,8 +68,8 @@
 				<?php 
 				echo anchor(site_url('nota/read/'.$nota->id_nota),'Read'); 
 				echo ' | '; 
-				echo anchor(site_url('nota/updatenew/'.$nota->id_nota),'Update'); 
-				echo ' | '; 
+				// echo anchor(site_url('nota/updatenew/'.$nota->id_nota),'Update'); 
+				// echo ' | '; 
 				echo anchor(site_url('nota/delete/'.$nota->id_nota),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
                 echo ' | '; 
                 echo anchor(base_url('cetaknota/index/'.$nota->id_nota),'Cetak','onclick="javasciprt: return confirm(\'Cetak Nota ?\')"'); 

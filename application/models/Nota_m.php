@@ -111,6 +111,12 @@ class Nota_m extends CI_Model
         $this->db->insert($table, $data);
     }
 
+    function updateNotadata($id, $data)
+    {
+        $this->db->where('id_notadata', $id);
+        $this->db->update('tbl_notadata', $data);
+    }
+
     function getnamapegserv($table){
         $this->db->order_by('id_peg_service', 'DESC');
         return $this->db->get_where($table, "ispeg = 0")->result();
