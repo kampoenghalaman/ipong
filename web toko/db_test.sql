@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 08:18 AM
+-- Generation Time: Oct 03, 2018 at 04:43 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -289,6 +289,7 @@ CREATE TABLE `tbl_nota` (
   `id_nota` int(5) NOT NULL,
   `nomor` varchar(55) NOT NULL,
   `penerimanota` varchar(50) NOT NULL,
+  `nomortelepon` varchar(20) NOT NULL,
   `namateknisi` varchar(50) NOT NULL,
   `namapegawai` varchar(50) NOT NULL,
   `tanggal` date NOT NULL,
@@ -301,30 +302,36 @@ CREATE TABLE `tbl_nota` (
 -- Dumping data for table `tbl_nota`
 --
 
-INSERT INTO `tbl_nota` (`id_nota`, `nomor`, `penerimanota`, `namateknisi`, `namapegawai`, `tanggal`, `totalbiaya`, `keterangan`, `isservice`) VALUES
-(1, '0', 'iu', 'iub', 'iub', '0000-00-00', 0, 'iub', 0),
-(2, '98', 'iuo', 'oiu', 'oiu', '0000-00-00', 0, 'oiu', 1),
-(3, '987', '987', '987', '987', '0000-00-00', 987, '987', 1),
-(4, '0', '0', '0', '0', '0000-00-00', 0, '0', 1),
-(5, '0', 'oiu', 'oiu', 'oiu', '0000-00-00', 0, 'oiu', 1),
-(6, '90', 'oi', '0', 'oi', '0000-00-00', 0, '0', 0),
-(7, '0', 'oi', '0', 'oi', '0000-00-00', 0, '0', 0),
-(8, '0', 'beli', '0', 'beli', '0000-00-00', 0, '0', 0),
-(9, '0', 'beli', '0', 'beli', '0000-00-00', 0, '0', 0),
-(10, '0', 'sc', 'sc', 'sc', '0000-00-00', 0, 'sc', 1),
-(11, '0', 'sc', 'sc', 'sc', '0000-00-00', 0, 'sc', 1),
-(12, '11', 'oiu', 'oiu', 'oi', '0000-00-00', 0, 'uo', 1),
-(13, '918', '89', '0', '98', '0000-00-00', 98, '0', 0),
-(14, '0918Serv13', 'oij', 'oij', 'oij', '0000-00-00', 0, 'j', 1),
-(15, '0918Serv14', ',,', 'll', 'l', '2018-09-05', 0, 'll', 1),
-(16, '0918Serv15', ',,', ',,', ',,', '2018-12-31', 0, ',,', 1),
-(17, '0918Prod16', 'lm', '0', 'lm', '2018-09-05', 0, '0', 0),
-(18, '0918Serv17', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
-(19, '0918Serv18', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
-(20, '0918Serv18', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
-(21, '0918Serv18', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
-(22, '0918Serv18', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
-(23, '0918Serv22', 'in', 'iun', 'iun', '2018-09-14', 0, 'oij', 1);
+INSERT INTO `tbl_nota` (`id_nota`, `nomor`, `penerimanota`, `nomortelepon`, `namateknisi`, `namapegawai`, `tanggal`, `totalbiaya`, `keterangan`, `isservice`) VALUES
+(1, '0', 'iu', '', 'iub', 'iub', '0000-00-00', 0, 'iub', 0),
+(2, '98', 'iuo', '', 'oiu', 'oiu', '0000-00-00', 0, 'oiu', 1),
+(3, '987', '987', '', '987', '987', '0000-00-00', 987, '987', 1),
+(4, '0', '0', '', '0', '0', '0000-00-00', 0, '0', 1),
+(5, '0', 'oiu', '', 'oiu', 'oiu', '0000-00-00', 0, 'oiu', 1),
+(6, '90', 'oi', '', '0', 'oi', '0000-00-00', 0, '0', 0),
+(7, '0', 'oi', '', '0', 'oi', '0000-00-00', 0, '0', 0),
+(8, '0', 'beli', '', '0', 'beli', '0000-00-00', 0, '0', 0),
+(9, '0', 'beli', '', '0', 'beli', '0000-00-00', 0, '0', 0),
+(10, '0', 'sc', '', 'sc', 'sc', '0000-00-00', 0, 'sc', 1),
+(11, '0', 'sc', '', 'sc', 'sc', '0000-00-00', 0, 'sc', 1),
+(12, '11', 'oiu', '', 'oiu', 'oi', '0000-00-00', 0, 'uo', 1),
+(13, '918', '89', '', '0', '98', '0000-00-00', 98, '0', 0),
+(14, '0918Serv13', 'oij', '', 'oij', 'oij', '0000-00-00', 0, 'j', 1),
+(15, '0918Serv14', ',,', '', 'll', 'l', '2018-09-05', 0, 'll', 1),
+(16, '0918Serv15', 'Anas', '1231293923912', 'afasf', 'MEDINA', '2018-09-24', 0, 'Good thing', 0),
+(17, '0918Prod16', 'lm', '', '0', 'lm', '2018-09-05', 0, '0', 0),
+(18, '0918Serv17', 'in', '', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
+(19, '0918Serv18', 'in', '', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
+(20, '0918Serv18', 'inTan BArokah', '10000000000', 'yadas', 'MEDINA', '2018-09-24', 0, 'oij', 1),
+(21, '0918Serv18', 'in', '', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
+(22, '0918Serv18', 'agus widodo', '080989999', 'iun', 'iun', '2018-09-24', 0, 'oij', 0),
+(23, '0918Serv22', 'in', '', 'iun', 'iun', '2018-09-14', 0, 'oij', 1),
+(24, '0918Serv23', 'wd', 'oj', 'oj', 'oj', '2018-09-16', 0, 'pojpojpoj', 1),
+(25, '0918Serv24', 'wew', 'ojo', 'yadas', 'MEDINA', '2018-09-24', 0, 'kjh', 1),
+(26, '0918Serv25', 'dfsdfsd', 'sdfsdfd', 'yadas', 'MEDINA', '2018-09-24', 0, 'ojojojojojo', 1),
+(29, '0918Prod28', 'Harry Waelung', '089567859586', '0', 'MEDINA', '2018-09-24', 30000, '0', 0),
+(30, '0918Prod29', 'Arif', '0898484291', '0', 'MEDINA', '2018-09-24', 240000, '0', 0),
+(31, '0918Prod30', 'Kurniawan', '089283957393', '0', 'MEDINA', '2018-09-24', 42000, '0', 0);
 
 -- --------------------------------------------------------
 
@@ -351,7 +358,21 @@ INSERT INTO `tbl_notadata` (`id_notadata`, `id_nota`, `namaprodukjasa`, `qty`, `
 (3, 22, 'jbkj', 9, 9, 909),
 (4, 22, 'jbkjb', 7, 8, 908),
 (5, 22, 'mnm', 7, 8, 98),
-(6, 23, 'iun', 8, 9, 72);
+(6, 23, 'iun', 8, 9, 72),
+(7, 24, 'oj', 9, 9, 81),
+(8, 24, 'mmmmmm', 8, 9, 0),
+(9, 25, 'ojoj', 78, 8, 624),
+(10, 26, 'ewqeqwe', 9, 9, 81),
+(11, 29, 'Terigu', 2, 15000, 30000),
+(12, 30, 'Keyword', 24, 10000, 240000),
+(13, 31, 'Kembali', 2, 1000, 2000),
+(14, 31, 'Menabung', 2, 1500, 30000),
+(15, 31, 'Rasa', 3, 2000, 6000),
+(16, 31, 'Rindu', 4, 1000, 4000),
+(24, 31, 'uhuyAD', 2, 4000, 8000),
+(25, 31, 'jengkol', 10, 23, 230),
+(26, 31, 'sepedah roda dua', 23, 100000, 2300000),
+(27, 31, 'hd', 2, 500000, 1000000);
 
 -- --------------------------------------------------------
 
@@ -363,17 +384,18 @@ CREATE TABLE `tbl_peg_service` (
   `id_peg_service` int(10) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `alamat` text NOT NULL,
-  `tlpn` varchar(15) NOT NULL
+  `tlpn` varchar(15) NOT NULL,
+  `ispeg` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_peg_service`
 --
 
-INSERT INTO `tbl_peg_service` (`id_peg_service`, `nama`, `alamat`, `tlpn`) VALUES
-(1, 'candrra', 'asdfgas', '9078654'),
-(2, 'yadas', 'asdasdasd.', '09876'),
-(3, 'afasf', 'asfasf', '25234');
+INSERT INTO `tbl_peg_service` (`id_peg_service`, `nama`, `alamat`, `tlpn`, `ispeg`) VALUES
+(1, 'candrra', 'asdfgas', '9078654', 0),
+(2, 'yadas', 'asdasdasd.', '09876', 0),
+(3, 'afasf', 'asfasf', '25234', 0);
 
 -- --------------------------------------------------------
 
@@ -850,12 +872,12 @@ ALTER TABLE `tbl_logo`
 -- AUTO_INCREMENT for table `tbl_nota`
 --
 ALTER TABLE `tbl_nota`
-  MODIFY `id_nota` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_nota` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tbl_notadata`
 --
 ALTER TABLE `tbl_notadata`
-  MODIFY `id_notadata` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_notadata` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tbl_peg_service`
 --
