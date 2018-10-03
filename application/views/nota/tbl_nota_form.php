@@ -3,7 +3,7 @@
         <form action="<?php echo $action; ?>" name="ipong" method="post">
 	    <?php if($button == "Services"){?>
     <div class="row">
-        <div class="span3">
+        <div class="span12">
         <div class="form-group">
             <label for="int">Nomor Nota<?php echo form_error('nomor') ?></label>
             <input type="text" class="form-control" name="nomor" id="nomor" placeholder="nomor" value="<?php echo $nomor; ?>" readonly/>
@@ -33,8 +33,8 @@
             <label for="date">Tanggal Nota<?php echo form_error('tanggal') ?></label>
             <input type="text" class="form-control" name="tanggal" id="tanggalnota" placeholder="Tanggal" value="<?php echo date("Y-m-d"); ?>" />
         </div>
-        </div> <!--tutup span3-->
-        <div class="span10">
+        <!-- </div> tutup span3 -->
+        <!-- <div class="span10">
             <div class="col-md-10 text-left">
             <div class="control-group input-group after-add-more">
                 <h5>Data Nota</h5>
@@ -46,9 +46,9 @@
                     <button class="btn add-more" type="button"><i class="icon-plus"></i></button>
                 </div>
                 
-            </div>
+            </div> -->
             <!-- DUPLIKAT -->
-            <div class="copy hide">
+            <!-- <div class="copy hide">
                 <div class="input-group control-group">
                     <div class="form-group">
                         <input type="text" class="form-control" name="jasa[]" placeholder="Service/Maintenance" />
@@ -58,9 +58,9 @@
                         <button class="btn btn-danger remove" type="button"><i class="icon-remove"></i></button>
                     </div>
                 </div>
-            </div> 
+            </div>  -->
             <!-- DUPLIKAT -->
-            </div> 
+            <!-- </div> 
             <div class="col-md-10 text-left">
                 <div class="form-group">
                 <label for="varchar">Total Biaya</label>
@@ -72,10 +72,10 @@
                 </div>
             </div>
         </div>
-        </div><!--tutup row-->
+        </div> --><!--tutup row-->
         <?php }else{?>
         <div class="row">
-        <div class="span4">
+        <div class="span12">
             <div class="form-group">
                 <label for="int">Nomor Nota<?php echo form_error('nomor') ?></label>
                 <input type="text" class="form-control" name="nomor" id="nomor" placeholder="Nomor" value="<?php echo $nomor; ?>" readonly/>
@@ -100,8 +100,8 @@
                 <label for="date">Tanggal Nota<?php echo form_error('tanggal') ?></label>
                 <input type="text" class="form-control" name="tanggal" id="tanggalnota" placeholder="Tanggal" value="<?php echo date("Y-m-d"); ?>" />
             </div>
-        </div> <!--tutup span4-->
-        <div class="span10">
+        <!-- </div> tutup span4 -->
+<!--         <div class="span10">
             <div class="col-md-10 text-left">
             <div class="control-group input-group after-add-more">
                 <h5>Data Nota</h5>
@@ -113,9 +113,9 @@
                     <button class="btn add-more" type="button"><i class="icon-plus"></i></button>
                 </div>
                 
-            </div>
+            </div> -->
             <!-- DUPLIKAT -->
-            <div class="copy hide">
+            <!-- <div class="copy hide">
                 <div class="input-group control-group">
                     <div class="form-group">
                         <input type="text" class="form-control" name="jasa[]" placeholder="Produk" />
@@ -125,9 +125,9 @@
                         <button class="btn btn-danger remove" type="button"><i class="icon-remove"></i></button>
                     </div>
                 </div>
-            </div> 
+            </div>  -->
             <!-- DUPLIKAT -->
-            </div> 
+            <!-- </div> 
             <div class="col-md-10 text-left">
                 <div class="form-group">
                 <label for="int">Total Biaya <?php echo form_error('totalbiaya') ?></label>
@@ -135,11 +135,12 @@
                 </div>
             </div>
         </div>
-        </div><!--tutup row-->
+        </div> --><!--tutup row-->
         <?php }?>
 	    <input type="hidden" name="id_nota" value="<?php echo $id_nota; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('nota') ?>" class="btn btn-default">Cancel</a>
+        </div>
 	</form>
     </div>
   </div>

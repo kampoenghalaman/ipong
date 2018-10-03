@@ -42,11 +42,11 @@ foreach($query->result() as $ttljml){
 }
 
 if ($isservice == '1'){ 
-    $jenis = "Servise";
+    $jenis = "Service";
     $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td><input type='text' class='form-control' name='nomor' id='nomor' placeholder='nomor' value=".$nomor." readonly/><br><br><input type='text' class='form-control' name='tanggal' id='tanggalnota' placeholder='Tanggal' value=".date("Y-m-d")." /></td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
             <tr><td colspan='6'></td></tr>";
     $ktrg = "<table class='table table-bordered' border='1'><tr><td width='10%''>Keterangan</td><td><textarea name='keterangan' class='input-block-level' rows='3'>".$keterangan."</textarea></td></tr></table>";
-    $judul = "<th>Servise / Maintenance</th>";
+    $judul = "<th>Service / Maintenance</th>";
  }else{
     $jenis = "Penjualan";
     $teknisi= "" ;
@@ -121,9 +121,10 @@ if ($isservice == '1'){
                     echo "</tr>";
                 }
             ?>
-            <tr><td></td><td colspan="4">Totalbiaya</td><td><?php echo "<p align='right'>Rp " . number_format($total,2,',','.'); ?></p></td></tr>
+            <tr><td></td><td colspan="4">Total Biaya</td><td><?php echo "<p align='right'>Rp " . number_format($total,2,',','.'); ?></p></td></tr>
             </tbody>
         </table>
+
         <br>
         <?php echo $ktrg;?>
         <br>

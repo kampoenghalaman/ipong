@@ -66,6 +66,31 @@ class Nota extends CI_Controller
         }
     }
 
+    public function updatenota($id){
+        echo "uhuy".$id;
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->update($this->input->post('id_nota', TRUE));
+        } else {
+            $data = array(
+            'nomor' => $this->input->post('nomor',TRUE),
+            'penerimanota' => $this->input->post('penerimanota',TRUE),
+            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
+            'namateknisi' => $this->input->post('namateknisi',TRUE),
+            'namapegawai' => $this->input->post('namapegawai',TRUE),
+            'tanggal' => $this->input->post('tanggal',TRUE),
+            'totalbiaya' => $this->input->post('totalbiaya',TRUE),
+            'keterangan' => $this->input->post('keterangan',TRUE),
+            'isservice' => $this->input->post('isservice',TRUE),
+            );
+
+            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('nota'));
+        }
+    }
+
     public function create() 
     {
         $data['nomornota'] = $this->Nota_m->getnomornota()->id_nota;
@@ -100,8 +125,9 @@ class Nota extends CI_Controller
                 'isservice' => set_value('isservice'),
             );
         }
+
         $data['namapegserv'] = $this->Nota_m->getnamapegserv("tbl_peg_service");
-        $this->template->load('template','nota/tbl_nota_form', $data);
+        $this->template->load('template','nota/tbl_nota_createnew', $data);
     }
     
     public function create_services() 
@@ -112,7 +138,6 @@ class Nota extends CI_Controller
             redirect(base_url('nota/create/1'));
             // $this->create();
         } else {
-            
             $data = array(
         		'nomor' => $this->input->post('nomor',TRUE),
         		'penerimanota' => $this->input->post('penerimanota',TRUE),
@@ -124,23 +149,12 @@ class Nota extends CI_Controller
         		'keterangan' => $this->input->post('keterangan',TRUE),
         		'isservice' => 1,
     	    );
-            
             $hmultif = count($_POST['jasa'])-1;
             #insertingdata
             $id_nota = $this->Nota_m->createNota('tbl_nota',$data);
-            #lastinsertid
-            $notadata = array();
-            for($i=0;$i<$hmultif;$i++){
-                $notadata['id_nota'] = $id_nota;
-                $notadata['namaprodukjasa'] = $_POST['jasa'][$i];
-                $notadata['qty'] = $_POST['qty'][$i];
-                $notadata['harga'] = $_POST['harga'][$i];
-                $notadata['jumlah'] = $_POST['jumlah'][$i];
-                $inotadata = $this->Nota_m->insertNotadata('tbl_notadata',$notadata);
-            }
         
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('nota'));
+            redirect(site_url('nota/updatenew/'.$id_nota));
         }
     }
     
@@ -149,7 +163,7 @@ class Nota extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('nota/create/1'));
+            redirect(base_url('nota/create/0'));
             // $this->create();
         } else {
             $data = array(
@@ -166,19 +180,9 @@ class Nota extends CI_Controller
             $hmultif = count($_POST['jasa'])-1;
             #insertingdata
             $id_nota = $this->Nota_m->createNota('tbl_nota',$data);
-            #lastinsertid
-            $notadata = array();
-            for($i=0;$i<$hmultif;$i++){
-                $notadata['id_nota'] = $id_nota;
-                $notadata['namaprodukjasa'] = $_POST['jasa'][$i];
-                $notadata['qty'] = $_POST['qty'][$i];
-                $notadata['harga'] = $_POST['harga'][$i];
-                $notadata['jumlah'] = $_POST['jumlah'][$i];
-                $inotadata = $this->Nota_m->insertNotadata('tbl_notadata',$notadata);
-            }
-            // $this->Nota_m->insert($data);
+            
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('nota'));
+            redirect(site_url('nota/updatenew/'.$id_nota));
         }
     }
 
