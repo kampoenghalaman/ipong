@@ -236,7 +236,7 @@ class Nota extends CI_Controller
             if($row->isservice == '1'){
                 $data = array(
                     'button' => 'Update Nota Services',
-                    'action' => site_url('nota/update_service'),
+                    'action' => base_url('nota/update_service'),
                     'id_nota' => set_value('id_nota', $row->id_nota),
                     'nomor' => set_value('nomor', $row->nomor),
                     'penerimanota' => set_value('penerimanota', $row->penerimanota),
@@ -251,7 +251,7 @@ class Nota extends CI_Controller
             }else{
                 $data = array(
                     'button' => 'Update Nota Penjualan',
-                    'action' => site_url('nota/update_produk'),
+                    'action' => base_url('nota/update_produk'),
                     'id_nota' => set_value('id_nota', $row->id_nota),
                     'nomor' => set_value('nomor', $row->nomor),
                     'penerimanota' => set_value('penerimanota', $row->penerimanota),
@@ -271,6 +271,55 @@ class Nota extends CI_Controller
             $data['jumlah'] = set_value('jumlah');
             $data['namapegserv'] = $this->Nota_m->getnamapegserv("tbl_peg_service");
             $this->template->load('template','nota/tbl_nota_updatenew', $data);
+        }
+    }
+
+    public function update_service() 
+    {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->update($this->input->post('id_nota', TRUE));
+        } else {
+            $data = array(
+            'nomor' => $this->input->post('nomor',TRUE),
+            'penerimanota' => $this->input->post('penerimanota',TRUE),
+            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
+            'namateknisi' => $this->input->post('namateknisi',TRUE),
+            'namapegawai' => $this->input->post('namapegawai',TRUE),
+            'tanggal' => $this->input->post('tanggal',TRUE),
+            'totalbiaya' => $this->input->post('totalbiaya',TRUE),
+            'keterangan' => $this->input->post('keterangan',TRUE),
+            'isservice' => $this->input->post('isservice',TRUE),
+            );
+
+            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('nota'));
+        }
+    }
+
+    public function update_produk() 
+    {
+        $this->_rules();
+        $id = $this->uri->segment(3);
+        if ($this->form_validation->run() == FALSE) {
+            // $this->update($this->input->post('id_nota', TRUE));
+               // redirect(site_url('nota/updatenew/'.$id));
+        } else {
+            $data = array(
+            'nomor' => $this->input->post('nomor',TRUE),
+            'penerimanota' => $this->input->post('penerimanota',TRUE),
+            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
+            'namapegawai' => $this->input->post('namapegawai',TRUE),
+            'tanggal' => $this->input->post('tanggal',TRUE),
+            'totalbiaya' => $this->input->post('totalbiaya',TRUE),
+            'isservice' => $this->input->post('isservice',TRUE),
+            );
+
+            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('nota'));
         }
     }
 
@@ -295,10 +344,6 @@ class Nota extends CI_Controller
             redirect(site_url('nota/updatenew/'.$this->input->post('id_nota')));
     }
 
-    public function updatedatanota(){
-        echo "ubah";
-    }
-
     public function hapusdatanota($id){
         $in= substr($id, 0, 2);
         $ind= substr($id, 2, 2);
@@ -306,53 +351,7 @@ class Nota extends CI_Controller
         redirect(site_url('nota/updatenew/'.$ind));
     }
     
-    public function update_service() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_nota', TRUE));
-        } else {
-            $data = array(
-    		'nomor' => $this->input->post('nomor',TRUE),
-    		'penerimanota' => $this->input->post('penerimanota',TRUE),
-            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
-    		'namateknisi' => $this->input->post('namateknisi',TRUE),
-    		'namapegawai' => $this->input->post('namapegawai',TRUE),
-    		'tanggal' => $this->input->post('tanggal',TRUE),
-    		'totalbiaya' => $this->input->post('totalbiaya',TRUE),
-    		'keterangan' => $this->input->post('keterangan',TRUE),
-    		'isservice' => $this->input->post('isservice',TRUE),
-    	    );
-
-            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('nota'));
-        }
-    }
-
-    public function update_produk() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_nota', TRUE));
-        } else {
-            $data = array(
-            'nomor' => $this->input->post('nomor',TRUE),
-            'penerimanota' => $this->input->post('penerimanota',TRUE),
-            'nomortelepon' => $this->input->post('nomortelepon',TRUE),
-            'namapegawai' => $this->input->post('namapegawai',TRUE),
-            'tanggal' => $this->input->post('tanggal',TRUE),
-            'totalbiaya' => $this->input->post('totalbiaya',TRUE),
-            'isservice' => $this->input->post('isservice',TRUE),
-            );
-
-            $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('nota'));
-        }
-    }
+    
     
     public function delete($id) 
     {
@@ -377,7 +376,7 @@ class Nota extends CI_Controller
 	$this->form_validation->set_rules('namapegawai', 'namapegawai', 'trim|required');
 	$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
 	$this->form_validation->set_rules('totalbiaya', 'totalbiaya', 'trim|required');
-	$this->form_validation->set_rules('keterangan', 'keterangan', 'trim');
+	// $this->form_validation->set_rules('keterangan', 'keterangan', 'trim');
 	// $this->form_validation->set_rules('isservice', 'isservice', 'trim|required');
 
 	$this->form_validation->set_rules('id_nota', 'id_nota', 'trim');

@@ -58,8 +58,9 @@ if ($isservice == '1'){
 ?>
 
     <body>
-        <h2 style="margin-top:0px">Nota <?php echo $jenis." | ".anchor(site_url('nota/read/'.$id_nota),"<input type='button' class='btn btn-primary' value='Cancel'/>");?></h2>
-        <table class="table" >
+        <h2 style="margin-top:0px">Nota <?php echo $jenis." | ".anchor(site_url('nota/'),"<input type='button' class='btn btn-primary' value='Cancel'/>");?></h2>
+        <form name="nota" action="<?php echo $action."/".$id_nota;?>" method="post">
+        <table class="table">
             <tr>
                 <td>No.Nota</td>
                 <td>:</td>
@@ -90,9 +91,28 @@ if ($isservice == '1'){
                     <td></td>
                     <td></td>
                 <?php }?>
-                
-                </tr>
+            </tr>
+        <!-- </table> -->
+        <!-- <table class="table" align="center"> -->
+        <tr>
+            <td>Nomor Telepon</td>
+            <td>:</td>
+            <td><input type="text" class="form-control" name="nomortelepon" id="nomortelepon" placeholder="Nomor Telepon" value="<?php echo $nomortelepon; ?>" readonly/></td>
+            <td>Nama Pegawai</td>
+            <td>:</td>
+            <td><input type="text" class="form-control" name="namapegawai" id="namapegawai" placeholder="Nama Pegawai" value="<?php echo $namapegawai; ?>" />
+                <input type="hidden" name="totalbiaya"  value="0">
+            </td>
+        </tr>
+        <tr>
+            <td width="20" colspan="5"></td>
+            <td width="30%">
+                <input type="hidden" name="id_nota" value="<?php echo $id_nota; ?>" /> 
+                <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+            </td>
+        </tr>
         </table>
+        </form>
         <!-- <table class="table" border="1">
            <?php echo $header;?>
         </table> -->
@@ -164,20 +184,7 @@ if ($isservice == '1'){
         <br>
         <br>
         <br>
-        <table class="table" align="center">
-        <?php $kontak = "<input type='text' class='form-control' name='nomortelepon' id='nomortelepon' placeholder='nomor telepon' value=".$nomortelepon." />";
-        $np = "<input type='text' class='form-control' name='namapegawai' id='namapegawai' placeholder='Nama pegawai' value=". strtoupper($this->session->userdata('username'))." readonly/>";
-        ?>
-            <tr><td width="600">Tanda Terima,<br><br><br><b><?php echo $penerimanota." / ".$kontak; ?></b></td><td> </td><td></td><td width="600">Hormat Kami,<br><br><br><b><?php echo $np; ?></b></td><td></td></tr>
-            <tr>
-                <td width="20" colspan="4"></td>
-                <td width="30%">
-                    <input type="hidden" name="id_nota" value="<?php echo $id_nota; ?>" /> 
-                    <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
-                    <a href="<?php echo site_url('nota/read/'.$id_nota) ?>" class="btn btn-default">Cancel</a>
-                </td>
-            </tr>
-        </table>
+        
     </body>
 
 <script src="<?php echo base_url('assets')?>/jquery.min.js"></script>
