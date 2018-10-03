@@ -308,12 +308,12 @@
         
         
         <li>
-          <a class="active" href="javascript:;">
+          <a class="active" href="<?php echo base_url('Nota');?>">
           <i class="icon-bookmark-empty"></i> 
-          <span class="title">Kwitansi</span>
+          <span class="title">Nota</span>
           <span class="arrow "></span>
           </a>
-          <ul class="sub-menu">
+<!--           <ul class="sub-menu">
             <li>
               <a href="<?php echo base_url();?>adminweb/tentangkami">
               Input
@@ -334,7 +334,7 @@
               Nota
               </a>
             </li>
-          </ul>
+          </ul> -->
         </li>
         
         
