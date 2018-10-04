@@ -58,7 +58,7 @@ if ($isservice == '1'){
 ?>
 
     <body>
-        <h2 style="margin-top:0px">Nota <?php echo $jenis." | ".anchor(site_url('nota/'),"<input type='button' class='btn btn-primary' value='Cancel'/>");?></h2>
+        <h2 style="margin-top:0px">Nota <?php echo $jenis." | ".anchor(site_url('nota/'),"<input type='button' class='btn btn-primary' value='Selesai'/>");?></h2>
         <form name="nota" action="<?php echo $action."/".$id_nota;?>" method="post">
         <table class="table">
             <tr>
@@ -87,7 +87,7 @@ if ($isservice == '1'){
                     </select>
                 </td>
                 <?php }else{ ?>
-                    <td></td>
+                    <td><input type="hidden" name="namateknisi"  value="0"></td>
                     <td></td>
                     <td></td>
                 <?php }?>
@@ -105,7 +105,7 @@ if ($isservice == '1'){
             </td>
         </tr>
         <tr>
-            <td width="20" colspan="5"></td>
+            <td width="20" colspan="5"><p align="right"><i>Setelah Melakukan Perubahan Klik Update sebelum Klik Selesai untuk Menyelesaikan Update</i></p></td>
             <td width="30%">
                 <input type="hidden" name="id_nota" value="<?php echo $id_nota; ?>" /> 
                 <button type="submit" class="btn btn-primary"><?php echo $button ?></button>

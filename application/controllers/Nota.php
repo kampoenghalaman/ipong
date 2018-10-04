@@ -319,7 +319,7 @@ class Nota extends CI_Controller
 
             $this->Nota_m->update($this->input->post('id_nota', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('nota'));
+            redirect(site_url('nota/updatenew/'.$id));
         }
     }
 
