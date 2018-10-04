@@ -10,6 +10,10 @@ class cetaknota extends CI_Controller {
 	function index(){
 		#definisi data
 		$id_nota = $this->uri->segment(3);
+		$query = $this->db->query("SELECT sum(jumlah) as jml FROM tbl_notadata WHERE id_nota =".$id_nota."");
+		foreach($query->result() as $ttljml){
+		    $total = $ttljml->jml;
+		}
 		$data = $this->db->get_where('tbl_nota', 'id_nota ='.$id_nota)->result();
 		foreach($data as $rew){
 			$nonota = $rew->nomor;
@@ -91,7 +95,7 @@ class cetaknota extends CI_Controller {
 		#total
 		$pdf->setfont('arial','B',10);
 		$pdf->cell(143,6,'Total',1,0,'R');
-		$pdf->cell(47,6,"Rp " . number_format($totalbiaya,2,',','.'),1,1,'R');
+		$pdf->cell(47,6,"Rp " . number_format($total,2,',','.'),1,1,'R');
 
 		#keterangan
 		$pdf->cell(10,2,'',0,1);

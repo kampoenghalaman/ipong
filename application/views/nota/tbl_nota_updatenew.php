@@ -97,7 +97,7 @@ if ($isservice == '1'){
         <tr>
             <td>Nomor Telepon</td>
             <td>:</td>
-            <td><input type="text" class="form-control" name="nomortelepon" id="nomortelepon" placeholder="Nomor Telepon" value="<?php echo $nomortelepon; ?>" readonly/></td>
+            <td><input type="text" class="form-control" name="nomortelepon" id="nomortelepon" placeholder="Nomor Telepon" value="<?php echo $nomortelepon; ?>" /></td>
             <td>Nama Pegawai</td>
             <td>:</td>
             <td><input type="text" class="form-control" name="namapegawai" id="namapegawai" placeholder="Nama Pegawai" value="<?php echo $namapegawai; ?>" />
