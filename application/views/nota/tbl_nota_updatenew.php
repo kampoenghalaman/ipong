@@ -43,7 +43,7 @@ foreach($query->result() as $ttljml){
 
 if ($isservice == '1'){ 
     $jenis = "Service";
-    $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td><input type='text' class='form-control' name='nomor' id='nomor' placeholder='nomor' value=".$nomor." readonly/><br><br><input type='text' class='form-control' name='tanggal' id='tanggalnota' placeholder='Tanggal' value=".date("Y-m-d")." /></td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
+    $header =  "<tr><td width='80'>No. Nota<br><br>Tanggal</td><td width='10'> : <br><br> : </td><td><input type='text' class='form-control' name='nomor' id='nomor' placeholder='nomor' value=".$nomor." readonly/><br><br><input type='text' class='form-control' name='tanggal' id='tanggalnota' placeholder='Tanggal' value=".$tanggal." /></td><td width='120'>Penerima Nota<br><br>Nama Teknisi</td><td width='10'> : <br><br> : </td><td>".$penerimanota."<br><br>".$namateknisi."</td></tr>
             <tr><td colspan='6'></td></tr>";
     $ktrg = "<table class='table table-bordered' border='1'><tr><td width='10%''>Keterangan</td><td><textarea name='keterangan' class='input-block-level' rows='3'>".$keterangan."</textarea></td></tr></table>";
     $judul = "<th>Service / Maintenance</th>";
@@ -72,7 +72,7 @@ if ($isservice == '1'){
             <tr>
                 <td>Tanggal</td>
                 <td>:</td>
-                <td><input type="text" class="form-control" name="tanggal" id="tanggalnota" placeholder="Tanggal" value="<?php echo date("Y-m-d"); ?>" /></td>
+                <td><input type="text" class="form-control" name="tanggal" id="tanggalnota" placeholder="Tanggal" value="<?php echo $tanggal; ?>" /></td>
                 <?php if($isservice == 1){ ?>
                 <td>Nama Teknisi</td>
                 <td>:</td>
