@@ -50,6 +50,27 @@
                 dateFormat: 'yy-mm-dd'
       });
     } );
+    $( function() {
+      $( "#tanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+    $( function() {
+      $( "#stanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+    $( function() {
+      $( "#etanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
   </script>
 </head>
 <body class="page-header-fixed">
@@ -335,6 +356,13 @@
               </a>
             </li>
           </ul> -->
+        </li>
+        <li>
+          <a class="active" href="<?php echo base_url('Kn');?>">
+          <i class="icon-bookmark-empty"></i> 
+          <span class="title">Keuangan</span>
+          <span class="arrow "></span>
+          </a>
         </li>
         
         

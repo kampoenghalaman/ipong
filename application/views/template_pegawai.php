@@ -5,11 +5,12 @@
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8" />
-  <title>Dashboard Pegawai</title>
+  <title>Admin Dashboard</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta content="" name="description" />
   <meta content="" name="author" />      
- <link href="<?php echo base_url();?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <!-- <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/> -->
+  <link href="<?php echo base_url();?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="<?php echo base_url();?>assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url();?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url();?>assets/css/style-metro.css" rel="stylesheet" type="text/css"/>
@@ -38,6 +39,39 @@
   <link rel="shortcut icon" href="favicon.ico" />
 
   <script src="<?php echo base_url();?>assets/scripts/jquery-1.8.3.js"></script>  
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/jquery-ui.css">
+  <script src="<?php echo base_url();?>assets/jquery-1.12.4.js"></script>  
+  <script src="<?php echo base_url();?>assets/jquery-ui.js"></script>
+  <script>
+    $( function() {
+      $( "#tanggalnota" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+    $( function() {
+      $( "#tanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+    $( function() {
+      $( "#stanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+    $( function() {
+      $( "#etanggal" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+      });
+    } );
+  </script>
 </head>
 <body class="page-header-fixed">
   <!-- BEGIN HEADER -->   
@@ -178,12 +212,19 @@
             </ul>
 
           <li class="">
-          <a href="<?php echo base_url();?>pegawai/pegservice">
-          <i class="icon-pencil"></i> 
-          <span class="title">Pegawai</span>
-          <span class="selected"></span>
-          </a>
-        </li>
+            <a href="<?php echo base_url();?>pegawai/pegservice">
+            <i class="icon-pencil"></i> 
+            <span class="title">Pegawai</span>
+            <span class="selected"></span>
+            </a>
+          </li>
+          <li class="">
+            <a href="<?php echo base_url();?>Notapegawai">
+            <i class="icon-pencil"></i> 
+            <span class="title">Nota</span>
+            <span class="selected"></span>
+            </a>
+          </li>
       
         
         
